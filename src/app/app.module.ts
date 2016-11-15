@@ -5,13 +5,17 @@ import { RouterModule } from '@angular/router';
 // import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import { AutoRefinanceComponent } from './components/auto-refinance/auto-refinance.component';
 import { AppRoutes } from './app.routes';
+import { AutoRefinanceComponent } from './components/auto-refinance/auto-refinance.component';
+import { MainNavigationComponent } from './components/main-navigation/main-navigation.component';
+import { HomePageComponent } from './components/home-page/home-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AutoRefinanceComponent
+    AutoRefinanceComponent,
+    MainNavigationComponent,
+    HomePageComponent
   ],
   imports: [
     BrowserModule,
