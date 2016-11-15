@@ -1,0 +1,6 @@
+/* Hide the sr only text when link is not active */
+.nav-item:not(.active) {
+	.sr-only {
+		display: none;
+	}
+}
