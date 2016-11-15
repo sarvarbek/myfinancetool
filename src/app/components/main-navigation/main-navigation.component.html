@@ -1,11 +1,13 @@
 <header>
-	<nav class="navbar navbar-light">
-		<a class="navbar-brand" routerLink="/">MyFinanceTool <span class="sr-only">(current)</span></a>
+	<div class="container">
+		<nav class="navbar navbar-dark">
+			<a class="navbar-brand" routerLink="/">MyFinanceTool <span class="sr-only">(current)</span></a>
 
-		<ul class="nav navbar-nav float-xs-right">
-			<li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" *ngFor="let link of links()">
-				<a class="nav-link" routerLink="{{link}}">{{navigationLinks[link]}} <span class="sr-only">(current)</span></a>
-			</li>
-		</ul>
-	</nav>
+			<ul class="nav navbar-nav float-xs-right">
+				<li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" *ngFor="let link of links()">
+					<a class="nav-link" routerLink="{{link}}">{{navigationLinks[link]}} <span class="sr-only">(current)</span></a>
+				</li>
+			</ul>
+		</nav>
+	</div>
 </header>
