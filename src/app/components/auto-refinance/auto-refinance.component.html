@@ -8,14 +8,14 @@
 					<label class="sr-only" for="currentLoanAmount">Loan Balance (in dollars)</label>
 					<div class="input-group">
 						<div class="input-group-addon">$</div>
-						<input type="text" class="form-control" id="currentLoanAmount" placeholder="Loan Balance">
+						<input type="text" class="form-control" id="currentLoanAmount" [(ngModel)]="currentAutoLoan.balance" placeholder="Loan Balance" name="currentLoanBalance">
 					</div>
 
 					<br>
 
 					<label class="sr-only" for="currentAPR">Annual Percentage Rate</label>
 					<div class="input-group">
-						<input type="text" class="form-control" id="currentAPR" placeholder="Annual Percentage Rate (APR)">
+						<input type="text" class="form-control" id="currentAPR" [(ngModel)]="currentAutoLoan.apr" placeholder="Annual Percentage Rate (APR)" name="currentLoanAPR">
 						<div class="input-group-addon">%</div>
 					</div>
 
@@ -23,10 +23,15 @@
 
 					<label class="sr-only" for="currentLoanAmount">Term (number of months)</label>
 					<div class="input-group">
-						<input type="text" class="form-control" id="currentTerms" placeholder="Term">
+						<input type="text" class="form-control" [(ngModel)]="currentAutoLoan.term" id="currentTerms" placeholder="Term" name="currentLoanTerm">
 						<div class="input-group-addon">Months</div>
 					</div>
 				</form>
+			</div>
+			<div class="col-xs-4">
+				<p>Monthly Payment {{monthlyPayment(currentAutoLoan.balance, currentAutoLoan.apr, currentAutoLoan.term)}}</p>
+				<p>Total Cost of Interest {{totalInterest(currentAutoLoan.balance, currentAutoLoan.apr, currentAutoLoan.term)}}</p>
+				<p>Total Cost of the Loan {{totalCost(currentAutoLoan.balance, currentAutoLoan.apr, currentAutoLoan.term)}}</p>
 			</div>
 		</div>
 	</div>
