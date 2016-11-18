@@ -4,7 +4,7 @@
 
 		<div class="row">
 			<div class="col-xs-4">
-				<form>
+				<form class="form">
 					<label class="sr-only" for="currentLoanAmount">Loan Balance (in dollars)</label>
 					<div class="input-group">
 						<div class="input-group-addon">$</div>
@@ -29,9 +29,66 @@
 				</form>
 			</div>
 			<div class="col-xs-4">
-				<p>Monthly Payment {{monthlyPayment(currentAutoLoan.balance, currentAutoLoan.apr, currentAutoLoan.term)}}</p>
-				<p>Total Cost of Interest {{totalInterest(currentAutoLoan.balance, currentAutoLoan.apr, currentAutoLoan.term)}}</p>
-				<p>Total Cost of the Loan {{totalCost(currentAutoLoan.balance, currentAutoLoan.apr, currentAutoLoan.term)}}</p>
+				<p>Monthly Payment ${{monthlyPayment(currentAutoLoan.balance, currentAutoLoan.apr, currentAutoLoan.term) | number:'1.2-2'}}</p>
+				<p>Total Cost of Interest ${{totalInterest(currentAutoLoan.balance, currentAutoLoan.apr, currentAutoLoan.term) | number:'1.2-2'}}</p>
+				<p>Total Cost of the Loan ${{totalCost(currentAutoLoan.balance, currentAutoLoan.apr, currentAutoLoan.term) | number:'1.2-2'}}</p>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container">
+	<div class="row">
+		<div class="col-xs-3" *ngFor="let autoLoan of comparisonLoans">
+			<div class="card">
+				<h3 class="card-header">
+					<span *ngIf="!editing" (click)="editing = true">{{autoLoan.label}}</span>
+					<form *ngIf="editing" (submit)="editing = false">
+						<label class="sr-only" attr.for="autoLoanLabel_{{index}}">Auto loan label</label>
+						<input type="text" class="form-control form-control-sm" id="autoLoanLabel_{{index}}" [(ngModel)]="autoLoan.label" placeholder="Label" (blur)="editing = false" name="autoLoanLabel">
+					</form>
+
+					<span *ngIf="!editing">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="removeComparisonLoan(autoLoan.id)"><span aria-hidden="true">&times;</span>
+						</button>
+					</span>
+				</h3>
+
+				<div class="card-block">
+					<form class="form">
+						<label class="sr-only" attr.for="autoLoanAmount_{{index}}">Loan Balance (in dollars)</label>
+						<div class="input-group">
+							<div class="input-group-addon">$</div>
+							<input type="text" class="form-control" id="autoLoanAmount_{{index}}" [(ngModel)]="autoLoan.balance" placeholder="Loan Balance" name="autoLoanBalance">
+						</div>
+
+						<br>
+
+						<label class="sr-only" attr.for="autoLoanAPR_{{index}}">Annual Percentage Rate</label>
+						<div class="input-group">
+							<input type="text" class="form-control" id="autoLoanAPR_{{index}}" [(ngModel)]="autoLoan.apr" placeholder="Annual Percentage Rate (APR)" name="autoLoanAPR">
+							<div class="input-group-addon">%</div>
+						</div>
+
+						<br>
+
+						<label class="sr-only" attr.for="autoLoanTerm_{{index}}">Term (number of months)</label>
+						<div class="input-group">
+							<input type="text" class="form-control" [(ngModel)]="autoLoan.term" id="autoLoanTerm_{{index}}" placeholder="Term" name="autoLoanTerm">
+							<div class="input-group-addon">Months</div>
+						</div>
+					</form>
+
+					<p>Monthly Payment ${{monthlyPayment(autoLoan.balance, autoLoan.apr, autoLoan.term) | number:'1.2-2'}}</p>
+					<p>Total Cost of Interest ${{totalInterest(autoLoan.balance, autoLoan.apr, autoLoan.term) | number:'1.2-2'}}</p>
+					<p>Total Cost of the Loan ${{totalCost(autoLoan.balance, autoLoan.apr, autoLoan.term) | number:'1.2-2'}}</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-3">
+			<div id="btnAddCompareLoan" class="card" tabindex="0" role="button" (click)="addComparisonLoan()">
+				<div class="card-block">
+					Add a loan to compare
+				</div>
 			</div>
 		</div>
 	</div>
