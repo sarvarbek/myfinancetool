@@ -29,9 +29,11 @@
 				</form>
 			</div>
 			<div class="col-xs-4">
-				<p>Monthly Payment ${{calcMonthlyPayment(currentAutoLoan) | number:'1.2-2'}}</p>
-				<p>Total Cost of Interest ${{calcTotalInterest(currentAutoLoan) | number:'1.2-2'}}</p>
-				<p>Total Cost of the Loan ${{calcTotalCost(currentAutoLoan) | number:'1.2-2'}}</p>
+				<p><strong>${{calcMonthlyPayment(currentAutoLoan) | number:'1.2-2'}}</strong> <small>/month</small></p>
+
+				<p><strong>${{calcTotalInterest(currentAutoLoan) | number:'1.2-2'}}</strong> <small>/total interest</small></p>
+
+				<p><strong>${{calcTotalCost(currentAutoLoan) | number:'1.2-2'}}</strong> <small>/total cost of loan</small></p>
 			</div>
 		</div>
 	</div>
