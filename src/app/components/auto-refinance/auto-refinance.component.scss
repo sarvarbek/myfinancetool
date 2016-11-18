@@ -1,3 +1,6 @@
+// Import Bootstrap Variables
+@import "node_modules/bootstrap/scss/variables";
+
 .sub-header {
 	padding: 30px 0;
 	margin-bottom: 30px;
@@ -6,17 +9,28 @@
 }
 
 #btnAddCompareLoan {
-	height: 414px;
+	height: 391px;
 
 	.card-block {
 		margin-top: -45px;
 	    position: relative;
 	    top: 50%;
 	    text-align: center;
-	    text-transform: uppercase;
 	}
 }
 
 button.close {
 	font-size: inherit;
+}
+
+.card-block {
+	.form {
+		margin-bottom: 15px;
+	}
+}
+
+p {
+	strong {
+		font-size: $font-size-lg;
+	}
 }

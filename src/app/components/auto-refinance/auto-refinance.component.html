@@ -8,14 +8,14 @@
 					<label class="sr-only" for="currentLoanAmount">Loan Balance (in dollars)</label>
 					<div class="input-group">
 						<div class="input-group-addon">$</div>
-						<input type="text" class="form-control" id="currentLoanAmount" [(ngModel)]="currentAutoLoan.balance" placeholder="Loan Balance" name="currentLoanBalance">
+						<input type="number" class="form-control" id="currentLoanAmount" [(ngModel)]="currentAutoLoan.balance" placeholder="Loan Balance" name="currentLoanBalance">
 					</div>
 
 					<br>
 
 					<label class="sr-only" for="currentAPR">Annual Percentage Rate</label>
 					<div class="input-group">
-						<input type="text" class="form-control" id="currentAPR" [(ngModel)]="currentAutoLoan.apr" placeholder="Annual Percentage Rate (APR)" name="currentLoanAPR">
+						<input type="number" class="form-control" id="currentAPR" [(ngModel)]="currentAutoLoan.apr" placeholder="Annual Percentage Rate (APR)" name="currentLoanAPR">
 						<div class="input-group-addon">%</div>
 					</div>
 
@@ -23,7 +23,7 @@
 
 					<label class="sr-only" for="currentLoanAmount">Term (number of months)</label>
 					<div class="input-group">
-						<input type="text" class="form-control" [(ngModel)]="currentAutoLoan.term" id="currentTerms" placeholder="Term" name="currentLoanTerm">
+						<input type="number" class="form-control" [(ngModel)]="currentAutoLoan.term" id="currentTerms" placeholder="Term" name="currentLoanTerm">
 						<div class="input-group-addon">Months</div>
 					</div>
 				</form>
@@ -58,14 +58,14 @@
 						<label class="sr-only" attr.for="autoLoanAmount_{{index}}">Loan Balance (in dollars)</label>
 						<div class="input-group">
 							<div class="input-group-addon">$</div>
-							<input type="text" class="form-control" id="autoLoanAmount_{{index}}" [(ngModel)]="autoLoan.balance" placeholder="Loan Balance" name="autoLoanBalance">
+							<input type="number" class="form-control" id="autoLoanAmount_{{index}}" [(ngModel)]="autoLoan.balance" placeholder="Loan Balance" name="autoLoanBalance">
 						</div>
 
 						<br>
 
 						<label class="sr-only" attr.for="autoLoanAPR_{{index}}">Annual Percentage Rate</label>
 						<div class="input-group">
-							<input type="text" class="form-control" id="autoLoanAPR_{{index}}" [(ngModel)]="autoLoan.apr" placeholder="Annual Percentage Rate (APR)" name="autoLoanAPR">
+							<input type="number" class="form-control" id="autoLoanAPR_{{index}}" [(ngModel)]="autoLoan.apr" placeholder="Annual Percentage Rate (APR)" name="autoLoanAPR">
 							<div class="input-group-addon">%</div>
 						</div>
 
@@ -73,20 +73,22 @@
 
 						<label class="sr-only" attr.for="autoLoanTerm_{{index}}">Term (number of months)</label>
 						<div class="input-group">
-							<input type="text" class="form-control" [(ngModel)]="autoLoan.term" id="autoLoanTerm_{{index}}" placeholder="Term" name="autoLoanTerm">
+							<input type="number" class="form-control" [(ngModel)]="autoLoan.term" id="autoLoanTerm_{{index}}" placeholder="Term" name="autoLoanTerm">
 							<div class="input-group-addon">Months</div>
 						</div>
 					</form>
 
-					<p>Monthly Payment ${{calcMonthlyPayment(autoLoan) | number:'1.2-2'}}</p>
-					<p>Total Cost of Interest ${{calcTotalInterest(autoLoan) | number:'1.2-2'}}</p>
-					<p>Total Cost of the Loan ${{calcTotalCost(autoLoan) | number:'1.2-2'}}</p>
+					<p><strong>${{calcMonthlyPayment(autoLoan) | number:'1.2-2'}}</strong> <small>/month</small></p>
+
+					<p><strong>${{calcTotalInterest(autoLoan) | number:'1.2-2'}}</strong> <small>/total interest</small></p>
+
+					<p><strong>${{calcTotalCost(autoLoan) | number:'1.2-2'}}</strong> <small>/total cost of loan</small></p>
 				</div>
 			</div>
 		</div>
 		<div class="col-xs-3">
 			<div id="btnAddCompareLoan" class="card" tabindex="0" role="button" (click)="addComparisonLoan()">
-				<div class="card-block">
+				<div class="card-block text-uppercase">
 					Add a loan to compare
 				</div>
 			</div>
