@@ -9,7 +9,7 @@ export class autoLoan {
 
 	constructor() {
 		this.id = Number(Math.random().toString().substr(2, 9)),
-        this.label = 'Untitled',
+        this.label = 'Untitled Loan',
 		this.balance = 25000,
 		this.apr = 3,
 		this.term = 60
@@ -40,7 +40,7 @@ export class AutoRefinanceComponent {
 		this.comparisonLoans.push(newAutoLoan);
 	};
 
-	private removeComparisonLoan(id) {
+	private removeComparisonLoan( id ) {
 		let removedLoanIndex = this.comparisonLoans.map(function (x) { return x.id; }).indexOf(id);
 
 		if (removedLoanIndex > -1) {
