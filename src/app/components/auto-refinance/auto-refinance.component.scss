@@ -5,6 +5,18 @@
 	color: #fff;
 }
 
+#btnAddCompareLoan {
+	height: 414px;
+
+	.card-block {
+		margin-top: -45px;
+	    position: relative;
+	    top: 50%;
+	    text-align: center;
+	    text-transform: uppercase;
+	}
+}
+
 button.close {
 	font-size: inherit;
 }
