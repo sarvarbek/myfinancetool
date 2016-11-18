@@ -29,9 +29,9 @@
 				</form>
 			</div>
 			<div class="col-xs-4">
-				<p>Monthly Payment ${{monthlyPayment(currentAutoLoan.balance, currentAutoLoan.apr, currentAutoLoan.term) | number:'1.2-2'}}</p>
-				<p>Total Cost of Interest ${{totalInterest(currentAutoLoan.balance, currentAutoLoan.apr, currentAutoLoan.term) | number:'1.2-2'}}</p>
-				<p>Total Cost of the Loan ${{totalCost(currentAutoLoan.balance, currentAutoLoan.apr, currentAutoLoan.term) | number:'1.2-2'}}</p>
+				<p>Monthly Payment ${{calcMonthlyPayment(currentAutoLoan) | number:'1.2-2'}}</p>
+				<p>Total Cost of Interest ${{calcTotalInterest(currentAutoLoan) | number:'1.2-2'}}</p>
+				<p>Total Cost of the Loan ${{calcTotalCost(currentAutoLoan) | number:'1.2-2'}}</p>
 			</div>
 		</div>
 	</div>
@@ -78,9 +78,9 @@
 						</div>
 					</form>
 
-					<p>Monthly Payment ${{monthlyPayment(autoLoan.balance, autoLoan.apr, autoLoan.term) | number:'1.2-2'}}</p>
-					<p>Total Cost of Interest ${{totalInterest(autoLoan.balance, autoLoan.apr, autoLoan.term) | number:'1.2-2'}}</p>
-					<p>Total Cost of the Loan ${{totalCost(autoLoan.balance, autoLoan.apr, autoLoan.term) | number:'1.2-2'}}</p>
+					<p>Monthly Payment ${{calcMonthlyPayment(autoLoan) | number:'1.2-2'}}</p>
+					<p>Total Cost of Interest ${{calcTotalInterest(autoLoan) | number:'1.2-2'}}</p>
+					<p>Total Cost of the Loan ${{calcTotalCost(autoLoan) | number:'1.2-2'}}</p>
 				</div>
 			</div>
 		</div>
