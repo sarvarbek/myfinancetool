@@ -12,9 +12,9 @@ export class MainNavigationComponent {
 	constructor() {
 		this.navigationLinks = {
 			'/': 'Home',
-		  	'/auto-refinance': 'Refinance Calculator',
-		  	'/tax-calculator': 'Tax Calculator',
-		  	'/savings-calculator': 'Savings Calculator'
+		  	'/auto-refinance': 'Refinance Calculator'
+		  	// '/tax-calculator': 'Tax Calculator',
+		  	// '/savings-calculator': 'Savings Calculator'
 		}
 	  	
   	}
