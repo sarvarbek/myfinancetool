@@ -28,13 +28,16 @@
 					</div>
 				</form>
 			</div>
-			<div class="col-xs-4">
+			<div class="col-xs-3">
 				<p><strong>${{calcMonthlyPayment(currentAutoLoan) | number:'1.2-2'}}</strong> <small>/month</small></p>
 
 				<p><strong>${{calcTotalInterest(currentAutoLoan) | number:'1.2-2'}}</strong> <small>/total interest</small></p>
 
 				<p><strong>${{calcTotalCost(currentAutoLoan) | number:'1.2-2'}}</strong> <small>/total cost of loan</small></p>
 			</div>
+			<!-- <div class="col-xs-5">
+				<trend-chart-component [config]="trendChartConfig"></trend-chart-component>
+			</div> -->
 		</div>
 	</div>
 </div>

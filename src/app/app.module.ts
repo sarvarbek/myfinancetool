@@ -9,7 +9,7 @@ import { AppRoutes } from './app.routes';
 import { AutoRefinanceComponent } from './components/auto-refinance/auto-refinance.component';
 import { MainNavigationComponent } from './components/main-navigation/main-navigation.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
-import { TrendChartComponent } from './charts/trend-chart/trend-chart.component';
+import { TrendChartComponent } from './components/charts/trend-chart/trend-chart.component';
 
 @NgModule({
   declarations: [
