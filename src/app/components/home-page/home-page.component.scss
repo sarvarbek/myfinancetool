@@ -7,6 +7,12 @@
     z-index: -1;
     height: 100vh;
     overflow: hidden;
+
+    img {
+    	width: 100%;
+    	position: fixed;
+  		bottom: 0;
+    }
 }
 
 .tool-info {
