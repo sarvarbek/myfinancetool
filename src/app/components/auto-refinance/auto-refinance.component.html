@@ -43,7 +43,7 @@
 </div>
 <div class="container">
 	<div class="row">
-		<div class="col-xs-3" *ngFor="let autoLoan of comparisonLoans">
+		<div class="col-sm-4 col-md-3" *ngFor="let autoLoan of comparisonLoans">
 			<div class="card">
 				<h3 class="card-header">
 					<span *ngIf="!editing" (click)="editing = true">{{autoLoan.label}}</span>
@@ -91,7 +91,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-xs-3">
+		<div class="col-sm-4 col-md-3">
 			<div id="btnAddCompareLoan" class="card" tabindex="0" role="button" (click)="addComparisonLoan()">
 				<div class="card-block text-uppercase">
 					Add a loan to compare
