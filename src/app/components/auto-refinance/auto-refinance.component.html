@@ -63,7 +63,7 @@
 						<label class="sr-only" attr.for="autoLoanAmount_{{index}}">Loan Balance (in dollars)</label>
 						<div class="input-group">
 							<div class="input-group-addon">$</div>
-							<input type="number" class="form-control" id="autoLoanAmount_{{index}}" [(ngModel)]="autoLoan.balance" placeholder="Loan Balance" name="autoLoanBalance">
+							<input type="number" class="form-control" id="autoLoanAmount_{{index}}" [(ngModel)]="autoLoan.balance" placeholder="Loan Balance" name="autoLoanBalance" max="999999" min="1000">
 						</div>
 
 						<br>
@@ -83,11 +83,24 @@
 						</div>
 					</form>
 
-					<p><strong>${{calcMonthlyPayment(autoLoan) | number:'1.2-2'}}</strong> <small>/month</small></p>
+					<p>
+						<strong [appPercentDifference]="calcMonthlyPayment(autoLoan)" [compare]="calcMonthlyPayment(currentAutoLoan)">
+							${{calcMonthlyPayment(autoLoan) | number:'1.2-2'}}
+						</strong>
+						<small>/month</small>
+					</p>
 
-					<p><strong>${{calcTotalInterest(autoLoan) | number:'1.2-2'}}</strong> <small>/total interest</small></p>
+					<p>
+						<strong [appPercentDifference]="calcTotalInterest(autoLoan)" [compare]="calcTotalInterest(currentAutoLoan)">
+							${{calcTotalInterest(autoLoan) | number:'1.2-2'}}
+						</strong>
+						<small>/total interest</small>
+					</p>
 
-					<p><strong>${{calcTotalCost(autoLoan) | number:'1.2-2'}}</strong> <small>/total cost of loan</small></p>
+					<p>
+						<strong [appPercentDifference]="calcTotalCost(autoLoan)" [compare]="calcTotalCost(currentAutoLoan)">${{calcTotalCost(autoLoan) | number:'1.2-2'}}</strong>
+						<small>/total cost of loan</small>
+					</p>
 				</div>
 			</div>
 		</div>
