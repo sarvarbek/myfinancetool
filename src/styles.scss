@@ -10,6 +10,13 @@ $input-border-color: #eee;
 // Import Bootstrap
 @import "node_modules/bootstrap/scss/bootstrap";
 
+.sub-header {
+	padding: 30px 0;
+	margin-bottom: 30px;
+	background-color: rgb(31, 77, 145);
+	color: #fff;
+}
+
 // Directive scss
 .change {
 	&.change-up,
