@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tax-savings.component.scss']
 })
 export class TaxSavingsComponent implements OnInit {
+	
+	private 2017taxBracket = []
 
   constructor() { }
 
