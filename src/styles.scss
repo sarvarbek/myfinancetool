@@ -9,3 +9,26 @@ $input-border-color: #eee;
 
 // Import Bootstrap
 @import "node_modules/bootstrap/scss/bootstrap";
+
+// Directive scss
+.change {
+	&.change-up,
+	&.change-down {
+		font-size: 11px;
+		color: #fff;
+		border-radius: 4px;
+		padding: 3px 8px;
+		display: inline-block;
+		vertical-align: top;
+    	margin-top: 4px;
+    	margin-right: 5px;
+	}
+
+	&.change-up {
+	    background-color: #5cb85c;
+	}
+
+	&.change-down {
+		background-color: #d9534f;
+	}
+}

@@ -10,6 +10,7 @@ import { AutoRefinanceComponent } from './components/auto-refinance/auto-refinan
 import { MainNavigationComponent } from './components/main-navigation/main-navigation.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { TrendChartComponent } from './components/charts/trend-chart/trend-chart.component';
+import { PercentDifferenceDirective } from './directives/percent-difference.directive';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { TrendChartComponent } from './components/charts/trend-chart/trend-chart
     AutoRefinanceComponent,
     MainNavigationComponent,
     HomePageComponent,
-    TrendChartComponent
+    TrendChartComponent,
+    PercentDifferenceDirective
   ],
   imports: [
     BrowserModule,
