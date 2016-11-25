@@ -11,6 +11,7 @@ import { MainNavigationComponent } from './components/main-navigation/main-navig
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { TrendChartComponent } from './components/charts/trend-chart/trend-chart.component';
 import { PercentDifferenceDirective } from './directives/percent-difference.directive';
+import { TaxSavingsComponent } from './components/tax-savings/tax-savings.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { PercentDifferenceDirective } from './directives/percent-difference.dire
     MainNavigationComponent,
     HomePageComponent,
     TrendChartComponent,
-    PercentDifferenceDirective
+    PercentDifferenceDirective,
+    TaxSavingsComponent
   ],
   imports: [
     BrowserModule,
