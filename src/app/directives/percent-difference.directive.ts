@@ -3,6 +3,7 @@ import { Directive, ElementRef, Input, Renderer, OnChanges } from '@angular/core
 @Directive({
   selector: '[appPercentDifference]'
 })
+
 export class PercentDifferenceDirective implements OnChanges {
 
 	@Input('appPercentDifference') currentValue : string;
