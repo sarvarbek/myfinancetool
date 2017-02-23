@@ -13,6 +13,7 @@ import { TrendChartComponent } from './components/charts/trend-chart/trend-chart
 import { PercentDifferenceDirective } from './directives/percent-difference.directive';
 import { TaxSavingsComponent } from './components/tax-savings/tax-savings.component';
 import { TaxBracketComponent } from './components/tax-bracket/tax-bracket.component';
+import { TakeHomePayComponent } from './components/take-home-pay/take-home-pay.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { TaxBracketComponent } from './components/tax-bracket/tax-bracket.compon
     TrendChartComponent,
     PercentDifferenceDirective,
     TaxSavingsComponent,
-    TaxBracketComponent
+    TaxBracketComponent,
+    TakeHomePayComponent
   ],
   imports: [
     BrowserModule,

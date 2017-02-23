@@ -5,21 +5,24 @@ import { Component } from '@angular/core';
   templateUrl: './main-navigation.component.html',
   styleUrls: ['./main-navigation.component.scss']
 })
+
 export class MainNavigationComponent {
 	
-	navigationLinks : Dictionary;
+	private navigationLinks : Dictionary;
 
 	constructor() {
 		this.navigationLinks = {
 			'/': 'Home',
-		  	'/auto-refinance': 'Refinance Calculator'
+		  	'/auto-refinance': 'Auto Refinance Calculator',
+		  	'/take-home-pay': 'Take Home Pay Calculator'
 		  	// '/tax-calculator': 'Tax Calculator',
 		  	// '/savings-calculator': 'Savings Calculator'
 		}
 	  	
   	}
 
-  	links() : Array<string> {
+  	// Used by the template to get the links
+  	private links() : Array<string> {
 		return Object.keys(this.navigationLinks);
 	}
 }

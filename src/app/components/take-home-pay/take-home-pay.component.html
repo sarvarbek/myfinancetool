@@ -1,0 +1,157 @@
+<div class="sub-header">
+	<div class="container">
+		<h2>Current Wage Info:</h2>
+
+		<div class="row">
+			<div class="col-xs-6 col-sm-4">
+				<form class="form">
+					<div class="form-group">
+						<label class="sr-only" for="currentFilingType">Filing Type</label>
+						<select class="form-control" id="currentFilingType" [(ngModel)]="currentWage.filingType" name="currentFilingType">
+						  <option value="single">Single</option>
+						  <option value="married">Married Filing Jointly</option>
+						  <option value="marriedSeparately">Married Filing Separately</option>
+						  <option value="headHousehold">Head of Household</option>
+						</select>
+					</div>
+
+					<div class="form-group">
+						<label class="sr-only" for="currentAnnualSalary">Annual Salary</label>
+						<div class="input-group">
+							<div class="input-group-addon">$</div>
+							<input type="number" class="form-control" id="currentAnnualSalary" [(ngModel)]="currentWage.salary" placeholder="Annual Salary" name="currentAnnualSalary">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="sr-only" for="current401kContributions">Pre-tax 401k Contributions</label>
+						<div class="input-group">
+							<input type="number" class="form-control" id="current401kContributions" [(ngModel)]="currentWage.contributions" placeholder="Current pre-tax 401k contributions" name="current401kContributions">
+							<div class="input-group-addon">%</div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="sr-only" for="currentOtherDeductions">Other pre-tax deductions</label>
+						<div class="input-group">
+							<div class="input-group-addon">$</div>
+							<input type="number" class="form-control" id="currentOtherDeductions" [(ngModel)]="currentWage.otherDeductions" placeholder="Other pre-tax deductions" name="currentOtherDeductions">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="sr-only" for="currentAfterTaxDeductions">After-tax deductions</label>
+						<div class="input-group">
+							<div class="input-group-addon">$</div>
+							<input type="number" class="form-control" id="currentAfterTaxDeductions" [(ngModel)]="currentWage.afterTaxDeductions" placeholder="After-tax deductions" name="currentAfterTaxDeductions">
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="col-xs-6 col-sm-4">
+				<p><strong>$ {{getTaxableIncome(currentWage) | number:'1.2-2'}}</strong> <small>taxable income</small></p>
+
+				<p><strong>$ {{getFederalTaxAmount(currentWage) | number:'1.2-2'}}</strong> <small>federal taxes per year</small></p>
+
+				<p><strong>$ {{getSavingsRate(currentWage) | number:'1.2-2'}}</strong> <small>yearly savings rate</small></p>
+
+				<p><strong>$ {{getMonthlyPay(currentWage) | number:'1.2-2'}}</strong> <small>monthly pay</small></p>
+
+				<p><strong>$ {{getBiWeeklyPay(currentWage) | number:'1.2-2'}}</strong> <small>bi-weekly pay</small></p>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container">
+	<div class="row">
+		<div class="col-sm-4 col-md-4" *ngFor="let wage of comparisonWages">
+			<div class="card">
+				<h3 class="card-header">
+					<span *ngIf="!editing" (click)="editing = true">{{wage.label}}</span>
+					<form *ngIf="editing" (submit)="editing = false">
+						<label class="sr-only" attr.for="wageLabel_{{index}}">Wage label</label>
+						<input type="text" class="form-control form-control-sm" id="wageLabel_{{index}}" [(ngModel)]="wage.label" placeholder="Label" (blur)="editing = false" name="wageLabel_{{index}}">
+					</form>
+
+					<span *ngIf="!editing">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="removeComparisonWage(wage.id)"><span aria-hidden="true">&times;</span>
+						</button>
+					</span>
+				</h3>
+
+				<div class="card-block">
+					<form class="form">
+						<div class="form-group">
+							<label class="sr-only" attr.for="otherFilingType_{{index}}">Filing Type</label>
+							<select class="form-control" id="otherFilingType_{{index}}" [(ngModel)]="wage.filingType" name="otherFilingType_{{index}}">
+							  <option value="single">Single</option>
+							  <option value="married">Married Filing Jointly</option>
+							  <option value="marriedSeparately">Married Filing Separately</option>
+							  <option value="headHousehold">Head of Household</option>
+							</select>
+						</div>
+
+						<div class="form-group">
+							<label class="sr-only" attr.for="otherAnnualSalary_{{index}}">Annual Salary</label>
+							<div class="input-group">
+								<div class="input-group-addon">$</div>
+								<input type="number" class="form-control" id="otherAnnualSalary_{{index}}" [(ngModel)]="wage.salary" placeholder="Annual Salary" name="otherAnnualSalary_{{index}}">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="sr-only" attr.for="other401kContributions_{{index}}">Pre-tax 401k Contributions</label>
+							<div class="input-group">
+								<input type="number" class="form-control" id="other401kContributions_{{index}}" [(ngModel)]="wage.contributions" placeholder="Current pre-tax 401k contributions" name="other401kContributions_{{index}}">
+								<div class="input-group-addon">%</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="sr-only" attr.for="otherOtherDeductions_{{index}}">Other pre-tax deductions</label>
+							<div class="input-group">
+								<div class="input-group-addon">$</div>
+								<input type="number" class="form-control" id="otherOtherDeductions_{{index}}" [(ngModel)]="wage.otherDeductions" placeholder="Other pre-tax deductions" name="otherOtherDeductions_{{index}}">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="sr-only" attr.for="otherAfterTaxDeductions_{{index}}">After-tax deductions</label>
+							<div class="input-group">
+								<div class="input-group-addon">$</div>
+								<input type="number" class="form-control" id="otherAfterTaxDeductions_{{index}}" [(ngModel)]="wage.afterTaxDeductions" placeholder="After-tax deductions" name="otherAfterTaxDeductions_{{index}}">
+							</div>
+						</div>
+					</form>
+
+					<p>
+						<strong [appPercentDifference]="getTaxableIncome(wage)" [compare]="getTaxableIncome(currentWage)">$ {{getTaxableIncome(wage) | number:'1.2-2'}}</strong> <small>taxable income</small>
+					</p>
+
+					<p>
+						<strong [appPercentDifference]="getFederalTaxAmount(wage)" [compare]="getFederalTaxAmount(currentWage)">$ {{getFederalTaxAmount(wage) | number:'1.2-2'}}</strong> <small>federal taxes per year</small>
+					</p>
+
+					<p>
+						<strong [appPercentDifference]="getSavingsRate(currentWage)" [compare]="getSavingsRate(wage)">$ {{getSavingsRate(wage) | number:'1.2-2'}}</strong> <small>yearly savings rate</small>
+					</p>
+
+					<p>
+						<strong [appPercentDifference]="getMonthlyPay(currentWage)" [compare]="getMonthlyPay(wage)">$ {{getMonthlyPay(wage) | number:'1.2-2'}}</strong> <small>monthly pay</small>
+					</p>
+
+					<p>
+						<strong [appPercentDifference]="getBiWeeklyPay(currentWage)" [compare]="getBiWeeklyPay(wage)">$ {{getBiWeeklyPay(wage) | number:'1.2-2'}}</strong> <small>bi-weekly pay</small>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-4 col-md-4">
+			<div id="btnAddCompareWage" class="card" tabindex="0" role="button" (click)="addComparisonWage()">
+				<div class="card-block text-uppercase">
+					Add wage to compare
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
