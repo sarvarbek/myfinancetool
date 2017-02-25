@@ -2,17 +2,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-// import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { AppRoutes } from './app.routes';
 import { AutoRefinanceComponent } from './components/auto-refinance/auto-refinance.component';
 import { MainNavigationComponent } from './components/main-navigation/main-navigation.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
-import { TrendChartComponent } from './components/charts/trend-chart/trend-chart.component';
 import { PercentDifferenceDirective } from './directives/percent-difference.directive';
-import { TaxSavingsComponent } from './components/tax-savings/tax-savings.component';
-import { TaxBracketComponent } from './components/tax-bracket/tax-bracket.component';
 import { TakeHomePayComponent } from './components/take-home-pay/take-home-pay.component';
 
 @NgModule({
@@ -21,16 +17,12 @@ import { TakeHomePayComponent } from './components/take-home-pay/take-home-pay.c
     AutoRefinanceComponent,
     MainNavigationComponent,
     HomePageComponent,
-    TrendChartComponent,
     PercentDifferenceDirective,
-    TaxSavingsComponent,
-    TaxBracketComponent,
     TakeHomePayComponent
   ],
   imports: [
     BrowserModule,
    	FormsModule,
-    // HttpModule
     RouterModule.forRoot(AppRoutes)
   ],
   providers: [],
