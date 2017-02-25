@@ -71,6 +71,6 @@ export class PercentDifferenceDirective implements OnChanges {
 		let currentValue = Number(this.currentValue);
 		let valueToCompare = Number(this.compare);
 
-		return Number((currentValue - valueToCompare)/((currentValue + valueToCompare) / 2) * 100).toFixed(2) + '%';
+		return Math.abs(Number((currentValue - valueToCompare)/((currentValue + valueToCompare) / 2) * 100)).toFixed(2) + '%';
 	}
 }
