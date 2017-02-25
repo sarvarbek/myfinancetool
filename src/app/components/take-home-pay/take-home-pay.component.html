@@ -10,8 +10,8 @@
 						<select class="form-control" id="currentFilingType" [(ngModel)]="currentWage.filingType" name="currentFilingType">
 						  <option value="single">Single</option>
 						  <option value="married">Married Filing Jointly</option>
-						  <option value="marriedSeparately">Married Filing Separately</option>
-						  <option value="headHousehold">Head of Household</option>
+						  <option value="married_separate">Married Filing Separately</option>
+						  <option value="head_household">Head of Household</option>
 						</select>
 					</div>
 
@@ -86,8 +86,8 @@
 							<select class="form-control" id="otherFilingType_{{index}}" [(ngModel)]="wage.filingType" name="otherFilingType_{{index}}">
 							  <option value="single">Single</option>
 							  <option value="married">Married Filing Jointly</option>
-							  <option value="marriedSeparately">Married Filing Separately</option>
-							  <option value="headHousehold">Head of Household</option>
+							  <option value="married_separate">Married Filing Separately</option>
+							  <option value="head_household">Head of Household</option>
 							</select>
 						</div>
 

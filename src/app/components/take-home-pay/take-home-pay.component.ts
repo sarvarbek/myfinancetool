@@ -122,6 +122,90 @@ export class TakeHomePayComponent implements OnInit {
 				}
 			],
 			'deduction': 12700
+		},
+		{
+			'label': 'Married Filing Separate',
+			'key': 'married_separate', 
+			'bracket': [
+				{
+					rate: 10,
+					from: 0,
+					to: 9325
+				},
+				{
+					rate: 15,
+					from: 9326,
+					to: 37950
+				},
+				{
+					rate: 25,
+					from: 37951,
+					to: 76550
+				},
+				{
+					rate: 28,
+					from: 76551,
+					to: 116675
+				},
+				{
+					rate: 33,
+					from: 116676,
+					to: 208350
+				},
+				{
+					rate: 35,
+					from: 208351,
+					to: 235350
+				},
+				{
+					rate: 39.6,
+					from: 235351,
+					to: 0
+				}
+			],
+			'deduction': 6350
+		},
+		{
+			'label': 'Head of Household',
+			'key': 'head_household', 
+			'bracket': [
+				{
+					rate: 10,
+					from: 0,
+					to: 13350
+				},
+				{
+					rate: 15,
+					from: 13351,
+					to: 50800
+				},
+				{
+					rate: 25,
+					from: 50801,
+					to: 131200
+				},
+				{
+					rate: 28,
+					from: 131201,
+					to: 212500
+				},
+				{
+					rate: 33,
+					from: 212501,
+					to: 416700
+				},
+				{
+					rate: 35,
+					from: 416701,
+					to: 444550
+				},
+				{
+					rate: 39.6,
+					from: 444551,
+					to: 0
+				}
+			],
+			'deduction': 9350
 		}
 	]
 
