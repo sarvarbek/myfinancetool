@@ -1,5 +1,4 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { TrendChartConfig } from '../charts/trend-chart/trend-chart-config';
 
 export class autoLoan {
 	public id: number;
@@ -25,7 +24,6 @@ export class autoLoan {
 
 export class AutoRefinanceComponent implements OnInit, AfterViewInit {
 
-	private trendChartConfig: Array<TrendChartConfig>;
 	private currentAutoLoan: autoLoan;
 	private comparisonLoans: autoLoan[] = [];
 	
@@ -37,67 +35,6 @@ export class AutoRefinanceComponent implements OnInit, AfterViewInit {
 	}
 
 	ngAfterViewInit() {
-		//this.getStats();
-	}
-
-	private generateAmortizationSchedule() {
-		let balance = this.currentAutoLoan.balance;
-		let apr = this.currentAutoLoan.apr;
-		let term = this.currentAutoLoan.term;
-		let monthlyPayment = this.calcMonthlyPayment(this.currentAutoLoan);
-		let amortizationTable = [];
-
-		// Set starting date as December 1, 2015
-		let date = new Date('2015-12-1');
-
-		for (let i = 0; i < term; i++) {
-			let monthlyRate = Number(apr) / 12 / 100;
-
-			let interestForMonth = balance * monthlyRate;
-			let principalForMonth = monthlyPayment - interestForMonth;
-
-			// Add 1 month to date
-			date.setMonth(date.getMonth() + 1);
-
-			let chartDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
-
-			amortizationTable.push({
-				"date": chartDate,
-				"principal": balance,
-				"interest": interestForMonth
-			});
-
-			balance -= principalForMonth;
-		}
-
-		return amortizationTable;
-	};
-
-	private getStats() {
-		let stats = this.generateAmortizationSchedule();
-
-		let loanPrincipalArea: TrendChartConfig = {
-          settings: {
-            fill: '#02a59d',
-            interpolation: 'monotone'
-          }, dataset: stats.map(data => {
-            return { x: new Date(data.date), y: data.principal };
-          })
-        };
-
-        let loanInterestArea: TrendChartConfig = {
-          settings: {
-            fill: 'rgba(195, 0, 47, 1)',
-            interpolation: 'monotone'
-          }, dataset: stats.map(data => {
-            return { x: new Date(data.date), y: data.interest };
-          })
-        };
-
-        // to finish we append our AreaChartConfigs into an array of configs 
-        this.trendChartConfig = new Array<TrendChartConfig>();
-        this.trendChartConfig.push(loanPrincipalArea);
-        this.trendChartConfig.push(loanInterestArea);
 	}
 
 	private addComparisonLoan() {
