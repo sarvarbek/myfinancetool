@@ -43,9 +43,9 @@ export class PercentDifferenceDirective implements OnChanges {
 
 	private displayPercentChange() : void {
 		if (this.currentValue === this.compare) {
-			this.renderer.setText(this.el.nativeElement.getElementsByClassName('change')[0], '');
+			this.el.nativeElement.getElementsByClassName('change')[0].textContent = '';
 		} else {
-			this.renderer.setText(this.el.nativeElement.getElementsByClassName('change')[0], this.percentChange());
+			this.el.nativeElement.getElementsByClassName('change')[0].textContent = this.percentChange();
 		}
 	}
 
