@@ -51,13 +51,13 @@
 			<div class="col-xs-6 col-sm-4">
 				<p><strong>$ {{getTaxableIncome(currentWage) | number:'1.2-2'}}</strong> <small>taxable income</small></p>
 
-				<p><strong>$ {{getFederalTaxAmount(currentWage) | number:'1.2-2'}}</strong> <small>federal taxes per year</small></p>
+				<p><strong>$ {{getFederalTaxAmount(currentWage) | number:'1.2-2'}}</strong> <small>federal taxes / year</small></p>
 
-				<p><strong>$ {{getSavingsRate(currentWage) | number:'1.2-2'}}</strong> <small>yearly savings rate</small></p>
+				<p><strong>$ {{getSavingsRate(currentWage) | number:'1.2-2'}}</strong> <small>401k contributions / year</small></p>
 
-				<p><strong>$ {{getMonthlyPay(currentWage) | number:'1.2-2'}}</strong> <small>monthly pay</small></p>
+				<p><strong>$ {{getTakeHomePay(currentWage) / 12 | number:'1.2-2'}}</strong> <small>monthly pay</small></p>
 
-				<p><strong>$ {{getBiWeeklyPay(currentWage) | number:'1.2-2'}}</strong> <small>bi-weekly pay</small></p>
+				<p><strong>$ {{getTakeHomePay(currentWage) / 26 | number:'1.2-2'}}</strong> <small>bi-weekly pay</small></p>
 			</div>
 		</div>
 	</div>
@@ -129,19 +129,19 @@
 					</p>
 
 					<p>
-						<strong [appPercentDifference]="getFederalTaxAmount(wage)" [compare]="getFederalTaxAmount(currentWage)">$ {{getFederalTaxAmount(wage) | number:'1.2-2'}}</strong> <small>federal taxes per year</small>
+						<strong [appPercentDifference]="getFederalTaxAmount(wage)" [compare]="getFederalTaxAmount(currentWage)">$ {{getFederalTaxAmount(wage) | number:'1.2-2'}}</strong> <small>federal taxes / year</small>
 					</p>
 
 					<p>
-						<strong [appPercentDifference]="getSavingsRate(currentWage)" [compare]="getSavingsRate(wage)">$ {{getSavingsRate(wage) | number:'1.2-2'}}</strong> <small>yearly savings rate</small>
+						<strong [appPercentDifference]="getSavingsRate(currentWage)" [compare]="getSavingsRate(wage)">$ {{getSavingsRate(wage) | number:'1.2-2'}}</strong> <small>401k contributions / year</small>
 					</p>
 
 					<p>
-						<strong [appPercentDifference]="getMonthlyPay(currentWage)" [compare]="getMonthlyPay(wage)">$ {{getMonthlyPay(wage) | number:'1.2-2'}}</strong> <small>monthly pay</small>
+						<strong [appPercentDifference]="getTakeHomePay(currentWage) / 12" [compare]="getTakeHomePay(wage) / 12">$ {{getTakeHomePay(wage) / 12 | number:'1.2-2'}}</strong> <small>monthly pay</small>
 					</p>
 
 					<p>
-						<strong [appPercentDifference]="getBiWeeklyPay(currentWage)" [compare]="getBiWeeklyPay(wage)">$ {{getBiWeeklyPay(wage) | number:'1.2-2'}}</strong> <small>bi-weekly pay</small>
+						<strong [appPercentDifference]="getTakeHomePay(currentWage) / 26" [compare]="getTakeHomePay(wage) / 26">$ {{getTakeHomePay(wage) / 26 | number:'1.2-2'}}</strong> <small>bi-weekly pay</small>
 					</p>
 				</div>
 			</div>
