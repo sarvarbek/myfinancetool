@@ -79,7 +79,12 @@ export class TakeHomePayComponent implements OnInit {
 					to: 0
 				}
 			],
-			'deduction': 6350
+			'deduction': 6350,
+			'ssRate': 15.3,
+			'ssMaxAmount': 127200,
+			'medRate': 2.9,
+			'addMedRate': 0.9,
+			'minMedAmount': 200000
 		},
 		{
 			'label': 'Married',
@@ -121,7 +126,12 @@ export class TakeHomePayComponent implements OnInit {
 					to: 0
 				}
 			],
-			'deduction': 12700
+			'deduction': 12700,
+			'ssRate': 12.30,
+			'ssMaxAmount': 127200,
+			'medRate': 1.45,
+			'addMedRate': 0.9,
+			'minMedAmount': 250000
 		},
 		{
 			'label': 'Married Filing Separate',
@@ -163,7 +173,12 @@ export class TakeHomePayComponent implements OnInit {
 					to: 0
 				}
 			],
-			'deduction': 6350
+			'deduction': 6350,
+			'ssRate': 15.3,
+			'ssMaxAmount': 127200,
+			'medRate': 2.9,
+			'addMedRate': 0.9,
+			'minMedAmount': 125000
 		},
 		{
 			'label': 'Head of Household',
@@ -205,38 +220,44 @@ export class TakeHomePayComponent implements OnInit {
 					to: 0
 				}
 			],
-			'deduction': 9350
+			'deduction': 9350,
+			'ssRate': 15.3,
+			'ssMaxAmount': 127200,
+			'medRate': 2.9,
+			'addMedRate': 0.9,
+			'minMedAmount': 200000
 		}
 	]
 
 	private getTaxableIncome(wage) {
-		let taxableIncome = this.getTakeHomeIncome(wage);
+		let taxableIncome = this.getPretaxIncome(wage);
 
 		// - standard deduction
 		taxableIncome -= this.getStandardDeduction(wage.filingType);
 
-		return taxableIncome;
+		return (taxableIncome > 0) ? taxableIncome : 0;
 	}
 
-	private getTakeHomeIncome(wage) {
+	private getPretaxIncome(wage) {
 		// salary - deductions - contributions
-		const getTakeHomeIncome = wage.salary - (wage.otherDeductions * 12) - (wage.salary * (wage.contributions / 100));
+		const getTakeHomeIncomeMonthly = wage.salary - (wage.otherDeductions * 12) - (wage.salary * (wage.contributions / 100));
 
-		return getTakeHomeIncome;
+		return getTakeHomeIncomeMonthly;
 	}
 
 	private getFederalTaxAmount(wage) {
 		const brackets = this.getTaxBracketByFilingType(wage.filingType);
 		const salary = this.getTaxableIncome(wage);
+		const bracketsLength = brackets.length;
 		let taxAmount = 0;
 
-		for (let x = 0; x < brackets.length; x ++) {
+		for (let x = 0; x < bracketsLength; x ++) {
 
 			const bracket = brackets[x];
 
 			if (salary > bracket.from) {
 
-				const bracketAmount = (salary > bracket.to && bracket.to !== 0) ? bracket.to : salary - bracket.from;
+				const bracketAmount = (salary > bracket.to && bracket.to !== 0) ? bracket.to - bracket.from : salary - bracket.from;
 
 				taxAmount += bracketAmount * (bracket.rate / 100);
 			} else {
@@ -251,16 +272,65 @@ export class TakeHomePayComponent implements OnInit {
 		return this.getBracketsByKey(filingType)['deduction'];
 	}
 
-	private getMonthlyPay(wage) {
-		const takeHomePay = this.getTakeHomeIncome(wage);
+	private getSSAmount(wage) {
+		const ssRate = this.getBracketsByKey(wage.filingType)['ssRate'];
+		const ssMaxAmount = this.getBracketsByKey(wage.filingType)['ssMaxAmount'];
+		const salary = this.getPretaxIncome(wage);
+		const adjustedSalary = (salary > ssMaxAmount) ? ssMaxAmount : salary;
 
-		return ((takeHomePay - this.getFederalTaxAmount(wage)) / 12) - wage.afterTaxDeductions;
+		return (adjustedSalary * (ssRate / 100)) / 2;
 	}
 
-	private getBiWeeklyPay(wage) {
-		const takeHomePay = this.getTakeHomeIncome(wage);
+	private getAddMedAmount(wage) {
+		const addMedRate = this.getBracketsByKey(wage.filingType)['addMedRate'];
+		const minMedAmount = this.getBracketsByKey(wage.filingType)['minMedAmount'];
+		const salary = this.getPretaxIncome(wage);
 
-		return ((takeHomePay - this.getFederalTaxAmount(wage)) / 26) - (wage.afterTaxDeductions / 2);
+		let addMedAmount = (minMedAmount - salary) * (addMedRate / 100);
+
+		return (addMedAmount > 0) ? addMedAmount : 0;
+	}
+
+	private getMedAmount(wage) {
+		const medRate = this.getBracketsByKey(wage.filingType)['medRate'];
+		const minMedAmount = this.getBracketsByKey(wage.filingType)['minMedAmount'];
+		const salary = this.getPretaxIncome(wage);
+		let medAmount = 0;
+
+		if (salary <= minMedAmount) {
+			medAmount += salary * (medRate / 100);
+		} else {
+			medAmount += minMedAmount * (medRate / 100);
+			medAmount += this.getAddMedAmount(wage);
+		}
+
+		return medAmount;
+	}
+
+	private getTakeHomePay(wage) {
+		let takeHomePay = 0;
+
+		// pretax income
+		const pretaxIncome = this.getPretaxIncome(wage);
+		takeHomePay += pretaxIncome;
+
+		// substract fed tax
+		const fedTax = this.getFederalTaxAmount(wage);
+		takeHomePay -= fedTax;
+
+		// substract social security tax
+		const ssTax = this.getSSAmount(wage);
+		takeHomePay -= ssTax;
+
+		// substract medicare tax
+		const medTax = this.getMedAmount(wage);
+		takeHomePay -= medTax;
+
+		// substract after tax deductions
+		const afterTax = wage.afterTaxDeductions * 12;
+		takeHomePay -= afterTax;
+
+		return takeHomePay;
 	}
 
 	private getSavingsRate(wage) {
@@ -301,6 +371,4 @@ export class TakeHomePayComponent implements OnInit {
 			this.comparisonWages.splice(removedWageIndex, 1);
 		}
 	};
-
-
 }
